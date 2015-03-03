@@ -1,0 +1,94 @@
+#include <conio.h>
+#include <iostream>
+#define TAM 100
+
+using namespace std;
+
+void cargar(int vec[],int n)
+{ int i;
+for(i=0; i<n;i++)
+{cout<<"Ingrese un valor: ";
+ cin>>vec[i];
+}
+getch();
+}
+void mostrar (int vec[], int n)
+{ int i;
+for(i=0;i<n;i++)
+{cout<<vec[i];
+cout<<endl;
+}
+getch();
+}
+int suma(int vec[], int n)
+{int i,k=0;
+for(i=0;i<n;i++)
+{k=k+vec[i];
+}
+return k;
+}
+int sumaimpares (int vec[], int n)
+{int i, k=0,h;
+for (i=0;i<n;i++)
+{ h=vec[i]%2;
+  if(h!=0)
+	 { k=k+vec[i];
+  }
+}
+return k;
+getch();
+}
+bool verificar(int x)
+{bool h=true;
+int i;
+for(i=2;i<x;i++)
+	{
+    if(x%i==0)
+		{h=false;
+	i=x;
+	}
+}
+return h;
+getch();
+}
+
+int sumaprimos(int vec[],int n)
+{int i,k=0;
+ for(i=0;i<n;i++)
+ {
+   if(verificar(vec[i]) ==true)
+	   k=k+vec[i];
+ }
+ return k;
+ getch();
+}
+
+void cargarnumerospares( int vec[], int n)
+{int i;
+vec[0]=0;
+ cout<<"\nEl vector cargado de" <<n<<"numeros pares es:\n";
+for(i=1;i<n;i++)
+{	vec[i]=vec[i-1]+2;
+     cout<<vec[i];
+	 cout<<endl;
+}
+getch();
+}
+
+
+
+
+void main()
+{ int vec[TAM],n,f,l;
+ cout<<"Ingrese el tamaño del vector: ";
+ cin>>n;
+ cargar(vec,n);
+ mostrar(vec,n);
+ f=suma(vec,n);
+ l=sumaimpares(vec,n);
+ cout<<"\nLa suma de todos los elementos es:\n "<<f;
+ cout<<"\nLa suma de impares es:\n "<<l;
+  cout<<"\nLa suma de primos es:\n "<<sumaprimos(vec,n);
+  cargarnumerospares(vec,n);
+ getch();
+}
