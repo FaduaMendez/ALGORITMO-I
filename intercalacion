@@ -1,0 +1,59 @@
+#include <conio.h>
+#include <iostream>
+#define TAM 100
+
+using namespace std;
+
+void cargar(int vec[],int n)
+{ int i;
+for(i=0; i<n;i++)
+{cout<<"Ingrese un valor: ";
+ cin>>vec[i];
+}
+getch();
+}
+void mostrar (int vec[], int n)
+{ int i;
+for(i=0;i<n;i++)
+{cout<<vec[i];
+cout<<endl;
+}
+getch();
+}
+bool verificarrepeticion(int elemento ,int vec2[],int n2)
+{int i;
+bool k=false;
+ for(i=0;i<n2;i++)
+ {if(elemento==vec2[i])
+    k=true;
+ }
+ return k;
+}
+
+void interseccion(int vec1[], int &n1, int vec2[], int n2, int vec3[], int &n3)
+{ int i,n=0;
+bool m;
+for(i=0;i<n1;i++)
+{ m=verificarrepeticion(vec1[i],vec2,n2);
+if(m==true)
+{vec3[n3]=vec1[i];
+n3++;
+}
+}
+}
+void main()
+{ int vec1[TAM],vec2[TAM],vec3[TAM],n1,n2,n3;
+ cout<<"\nIngrese el tamaño del primer vector: \n";
+ cin>>n1;
+ cout<<"\nIngrese el tamaño del segundo vector: \n";
+ cin>>n2;
+ cout<<"\nIngrese valores para el primer vector: \n";
+ cargar(vec1,n1);
+ cout<<"\nIngrese valores para el segundo vector: \n";
+  cargar(vec2,n2);
+   interseccion(vec1,n1,vec2,n2,vec3,n3);
+
+ mostrar(vec3,n3);
+ getch();
+}
+
