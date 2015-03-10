@@ -1,0 +1,44 @@
+#include <conio.h>
+#include <iostream>
+#define TAM 100
+
+using namespace std;
+
+void cargar(int vec[],int n)
+{ int i;
+for(i=0; i<n;i++)
+{cout<<"Ingrese un valor: ";
+ cin>>vec[i];
+}
+getch();
+}
+void mostrar (int vec[], int n)
+{ int i;
+for(i=0;i<n;i++)
+{cout<<vec[i];
+cout<<endl;
+}
+getch();
+}
+
+void eliminarimpares(int vec[], int &n)
+{ int i,k;
+for(i=0;i<n;i++)
+{ if((vec[i]%2)!=0)
+    {for(k=i;k<n-1;k++)
+	{vec[k]=vec[k+1];
+}
+	n--;
+    i--;
+}
+}
+}
+
+void main()
+{ int vec[TAM],n,f,l;
+ cout<<"Ingrese el tamaño del vector: ";
+ cin>>n;
+ cargar(vec,n);
+ eliminarimpares(vec,n);
+ mostrar(vec,n);
+ getch();
