@@ -1,0 +1,65 @@
+#include <iostream>
+#include <conio.h>
+#define TAM 100
+
+using namespace std;
+
+struct regamigo
+{char nombre[TAM];
+  int edad;
+};       
+
+void mostrar(regamigo vec[], int n)
+{int i;
+for(i=0;i<n;i++)
+{cout<<endl<<vec[i].nombre<<" "<<vec[i].edad;
+}
+getch();
+}
+
+void cargar(regamigo vec[],int n)
+{int i;
+for(i=0;i<n;i++)
+	{cout<<"Ingrese un nombre: ";
+    cin>>(vec[i].nombre);
+	cout<<"Ingrese la edad: ";
+	cin>>(vec[i].edad);
+}
+getch();
+}
+
+int mayor(regamigo vec[],int n)
+{int i,mayor=0;
+for(i=0;i<n;i++)
+{if (vec[i].edad>mayor)
+ mayor=vec[i].edad;
+}
+return mayor;
+getch();
+}
+
+void ordenar (regamigo vec[],int n)
+{regamigo aux;
+int i,j;
+for(i=0;i<n;i++)
+	{for(j=i+1;j<n;j++)
+{if(vec[j].edad<vec[i].edad)
+	{aux=vec[i];
+     vec[i]=vec[j];
+	 vec[j]=aux;
+}
+}
+getch();	}
+}
+void main()
+{regamigo reg[TAM];
+int n,l;
+cout<<"Ingrese el numero de amigos: ";
+cin>>n;
+cargar(reg,n);
+l=mayor(reg,n);
+cout<<"La edad mayor es: "<<l<<endl;
+ordenar(reg,n);
+mostrar(reg,n);
+getch();
+}
