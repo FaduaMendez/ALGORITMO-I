@@ -1,0 +1,39 @@
+#include <iostream>
+#include <conio.h>
+#define TAM 100
+
+using namespace std;
+
+struct elemento
+{ int vec[TAM];
+};
+
+void cargar (elemento vect[], int n)
+{int i, j;
+for(i=0;i<n;i++)
+  {for(j=0;j<n;j++)
+{cout<<"INGRESE UN VALOR: ["<<i<<"].["<<j<<"]";
+ cin>>vect[i].vec[j];
+}
+}
+}
+
+
+
+int sumaposiciones(elemento vect[], int n)
+{int i,s=0;
+for(i=0;i<n;i++)
+{s=s+vect[i].vec[i];
+}
+return s;
+}
+
+void main()
+{elemento vect[TAM];
+ int n;
+ cout<<"Ingrese el tamaño del vector: ";
+ cin>>n;
+ cargar(vect,n);
+ cout<<"La suma es:  "<<sumaposiciones(vect,n);
+ getch();
+}
