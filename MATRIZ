@@ -1,0 +1,184 @@
+#include <iostream>
+#include <conio.h>
+#include <stdlib.h>
+#define fil 100
+#define col 100
+#define TAM 100
+
+using namespace std;
+
+void cargar(int matriz[fil][col], int n, int m)
+{int i, j;
+ for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   { cout<<"Ingrese un valor: ";
+    cin>>matriz[i][j];
+ }
+ }
+}
+
+void mostrar(int matriz[fil][col], int n, int m)
+{int i, j;
+ for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   { cout<<matriz[i][j]<<"  ";
+ }
+ cout<<endl;
+ }
+}
+
+int sumatotal(int matriz[fil][col], int n, int m)
+{int i, j, k=0;
+ for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   { k=k+matriz[i][j];
+ }
+ }
+ return k;
+ }
+
+void sumaporfilas(int matriz[fil][col], int n, int m)
+{int i, j,k=0,l=0;
+for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   { k=k+matriz[i][j];
+ }
+  cout<<"la suma de la fila "<<i<<"es  "<<k<<endl;
+  l=l+k;
+  k=0;
+ }
+cout<<"La suma total es: "<<l;
+}
+
+int sumatriangularsuperior(int matriz[fil][col], int n, int m)
+{int i, j, k=0;
+ for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   { if(i<j)
+      {k=k+matriz[i][j];
+ }
+ }
+ }
+ return k;
+}
+void almacenarenvector(int matriz[fil][col], int n, int m,int vec[])
+{int i, j,k=0,u=0;
+for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   { k=k+matriz[i][j];
+ }
+  vec[i]=k;
+  k=0;
+ }
+}
+
+void mostrar(int vec[], int n)
+{int i; 
+for(i=0;i<n;i++)
+	{cout<<vec[i]<<"  ";
+}
+}
+bool verificar(int n)
+{int i;
+for(i=2;i<n;i++)
+{ if(n%i==0)
+  { return false;
+}
+}
+return true;
+}
+
+int primo(int n)
+{int i,cp=0,c=0;
+ while(cp<n)
+ { c++;
+   if(verificar(c)==true)
+   {cp++;
+   }
+ }
+ return c;
+}
+void cargarautomaticamente(int matriz[fil][col],int n, int m)
+{int i,j,impar=1,y=1;
+ for(i=0;i<n;i++)
+  {if(i%2==0)
+	  {for(j=0;j<m;j++)
+	  {matriz[i][j]=impar;
+       impar=impar+2;
+ }}
+ 
+  else
+	  {for(j=0;j<m;j++)
+	  {matriz[i][j]=primo(y);
+       y++;
+      }
+ }
+ }
+}
+ 
+void main()
+{int matriz[fil][col];
+int n,m,o,p,h,vec[TAM];
+cout<<"Ingrese el numero de filas: ";
+cin>>n;
+cout<<"Ingrese el numero de columnas: ";
+cin>>m;
+do{
+	cout<<"\tMENU\t\n";
+	cout<<"1.CARGAR\n";
+	cout<<"2.MOSTRAR\n";
+	cout<<"3.SUMA DE LOS ELEMENTOS\n";
+	cout<<"4.SUMA TRIANGULAR SUPERIOR\n";
+	cout<<"5.SUMA POR FILAS\n";
+	cout<<"6.VECTOR CON LA SUMA DE FILAS";
+	cout<<"7.CARGAR AUTOMATICAMENTE\n";
+	cout<<"0.SALIR\n";
+	cout<<"Elija una opcion: \n";
+	cin>>o;
+	switch(o)
+	{case 1: cout<<"\nCARGAR\n";
+			 cargar(matriz,n,m);
+			 getch();
+			 break;
+	 case 2: cout<<"\nMOSTRAR\n";
+	         mostrar(matriz,n,m);
+			 getch();
+			 break;
+			 
+	 case 3: cout<<"\nSUMA DE ELEMENTOS\n";
+			 p=sumatotal(matriz,n,m);
+		    cout<<"La suma total es "<<p;
+		     getch();
+			 break;
+	 case 4: cout<<"\nSUMA TRIANGULAR SUPERIOR\n";
+			 h=sumatriangularsuperior(matriz,n,m);
+		    cout<<"La suma de la triangular superior es "<<h;
+		     getch();
+			 break;
+	case 5: cout<<"\nSUMA POR FILAS\n";
+			sumaporfilas(matriz,n,m);
+		     getch();
+			 break;
+	case 6: cout<<"\nVECTOR CON LA SUMA DE FILAS\n";
+			almacenarenvector(matriz,n,m,vec);
+			mostrar(vec,n);
+		     getch();
+			 break;
+    case 7: cout<<"\nCARGAR AUTOMATICAMENTE\n";
+			cargarautomaticamente(matriz,n,m);
+			mostrar(matriz,n,m);
+		     getch();
+			 break;
+	case 0: cout<<"SALIR";
+		    getch();
+			break;
+	default: cout<<"ERROR";
+		     getch();
+			 break;
+	}
+	system("cls");
+}
+while(o!=0);
+getch();
+}
+
