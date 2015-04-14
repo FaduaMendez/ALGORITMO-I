@@ -1,0 +1,54 @@
+#include <iostream>
+#include <conio.h>
+#define   F 15
+#define   C 35
+
+using namespace std;
+
+char pantalla[F][C];
+
+
+void mostrar()
+{
+int i,j;
+for(i=0;i<F;i++)
+{for(j= 0; j<C;j++)
+ {cout<<pantalla[i][j];
+}
+cout<<endl;
+}
+}
+
+void limpiarpantalla()
+{int i,j;
+for(i=0;i<F;i++)
+{for(j=0;j<C;j++)
+{pantalla[i][j]=' ';
+}
+}
+}
+
+void cargar(int x1,int x2,int y1,int y2)
+{char matriz[F][C];
+int i;
+for(i=x1;i<x2;i++)
+ {pantalla[i][y1]= char(179);
+}
+
+}
+void main()
+{
+int x1,x2,y1,y2;
+cout<<"Ingrese x1: ";
+cin>>x1;
+cout<<"Ingrese y1: ";
+cin>>y1;
+cout<<"Ingrese x2: ";
+cin>>x2;
+cout<<"Ingrese y2: ";
+cin>>y2;
+limpiarpantalla();
+cargar(x1,x2,y1,y2);
+mostrar();
+getch();
+}
