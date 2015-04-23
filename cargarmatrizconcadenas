@@ -1,0 +1,42 @@
+#include <iostream>
+#include <conio.h>
+#define N 10
+
+using namespace std;
+
+struct palabra
+{char cad[N];
+};
+
+void cargarmatriz(palabra matriz[N][N], int n,int m)
+{int i,j;
+for(i=0;i<n;i++)
+{
+for(j=0;j<m;j++)
+{cout<<"Ingrese una cadena: ";
+ gets_s(matriz[i][j].cad);
+}
+}
+}
+
+void mostrar(palabra matriz[N][N], int n,int m)
+	{int i,j;
+for(i=0;i<n;i++)
+{for(j=0;j<m;j++)
+{cout<<matriz[i][j].cad<<" ";
+}
+cout<<endl;
+}
+}
+
+void main()
+	{palabra matriz[N][N];
+int n,m;
+cout<<"Ingrese las filas: ";
+cin>>n;
+cout<<"Ingrese  las columnas: ";
+cin>>m;
+cargarmatriz(matriz,n,m);
+mostrar(matriz,n,m);
+_getch();
+}
