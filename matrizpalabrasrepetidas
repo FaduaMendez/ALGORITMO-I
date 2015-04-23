@@ -1,0 +1,72 @@
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#define N 10
+
+using namespace std;
+
+struct palabra {
+char cad[N];
+};
+struct matriz{
+palabra M[N][N];
+};
+
+void separarpalabras(char cadena[],palabra vec[],int &n)
+{int i,cont=0,tam,c;
+tam=strlen(cadena);
+i=0;
+while(i<tam)
+{c=0;
+while(cadena[i]!=' ' && cadena[i]!='\0')
+{vec[cont].cad[c]=cadena[i];
+c++;
+i++;
+}
+vec[cont].cad[c]='\0';
+i++;
+cont++;
+}
+n=cont;
+}
+
+void llenarvecmatrices(palabra vec[N],int n,matriz V[N])
+{int i,j,k;
+for(i=0;i<n;i++){
+	for(j=0;j<n;j++){
+		for(k=0;k<n;k++){
+			V[j].M[k][i]=vec[i];
+		}
+	}
+}
+}
+
+void mostrar(matriz V[], int n)
+{int i,j,k;
+for(i=0;i<n;i++)
+{for(j=0;j<n;j++)
+{for(k=0;k<n;k++)
+{cout<<V[i].M[j][k].cad<<" ";
+}
+cout<<endl;
+}
+cout<<" ";
+}
+}
+
+void ejercicio(char cadena[], matriz V[],int &n)
+{palabra vec[N];
+separarpalabras(cadena,vec,n);
+llenarvecmatrices(vec,n,V);
+
+}
+void main()
+{ char cadena[N];
+matriz V[N];
+int n;
+cout<<"Ingrese una cadena: ";
+gets(cadena);
+ejercicio(cadena,V,n);
+mostrar(V,n);
+getch();
+}
