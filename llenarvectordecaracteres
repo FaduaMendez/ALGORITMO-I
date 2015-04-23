@@ -1,0 +1,43 @@
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#define N 10
+
+using namespace std;
+struct palabra{
+	char cad[N];
+};
+struct elemento{
+palabra V[N];
+	char M[N][N];
+};
+
+void cargar(elemento vector[],int n)
+{int i,j;
+for(i=0;i<n;i++)
+	{for(j=0;j<n;j++)
+	{cout<<"Ingrese una cadena: ";
+	gets(vector[i].V[j].cad);
+	}
+}
+}
+
+void mostrar(elemento vector[],int n)
+{int i,j;
+for(i=0;i<n;i++)
+	{for(j=0;j<n;j++)
+	{cout<<(vector[i].V[j].cad)<<" ";
+	}
+cout<<endl;
+}
+}
+
+void main()
+{elemento vector[N];
+int n;
+cout<<"Ingrese el tamño del vector: ";
+cin>>n;
+cargar(vector,n);
+mostrar(vector,n);
+getch();
+}
