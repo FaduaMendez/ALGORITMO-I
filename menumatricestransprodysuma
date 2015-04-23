@@ -1,0 +1,187 @@
+#include <iostream>
+#include <conio.h>
+#include <stdlib.h>
+#define  F 100
+#define  C 100
+
+using namespace std;
+void cargar(int matriz[F][C],int n,int m)
+{int i,j;
+ for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   {cout<<"Ingrese un valor: ";
+   cin>>matriz[i][j];
+ }
+ }
+}
+void mostrar(int matriz[F][C],int n,int m)
+{int i,j;
+ for(i=0;i<n;i++)
+ {for(j=0;j<m;j++)
+   {cout<<matriz[i][j]<<"  ";
+ }
+ cout<<endl;
+ }
+}
+
+void transpuesta(int matriz[F][C],int n,int m)
+{int i,j,aux;
+ for(i=0;i<n;i++)
+ {for(j=i+1;j<m;j++)
+   {aux=matriz[i][j];
+    matriz[i][j]=matriz[j][i];
+	matriz[j][i]=aux;
+ }
+ }
+}
+void transpuestanocuadrada(int matriz[F][C],int &n,int &m)
+{int i,j,aux,k=0,lim=0,a;
+ for(i=0;i<m;i++)
+ {for(j=i+1;j<n;j++)
+   {aux=matriz[i][j];
+    matriz[i][j]=matriz[j][i];
+	matriz[j][i]=aux;
+ }
+ }
+ if(n>m)
+	{a=n-m;
+     lim=m;
+     m=m+a;
+	 for(i=m;i<n;i++)
+     {for(j=lim+1;j<m;j++)
+	 {
+		 aux=matriz[i][j];
+    matriz[i][j]=matriz[j][i];
+	matriz[j][i]=aux;
+ }
+	
+}
+	  n=n-a;
+ }
+ else
+	 {a=m-n;
+     lim=n;
+     n=n+a;
+	 for(j=lim;j<n;j++)
+     {for(i=0;i<m;i++)
+	 {
+		 aux=matriz[i][j];
+    matriz[i][j]=matriz[j][i];
+	matriz[j][i]=aux;
+ }
+	
+}
+	 m=m-a;
+}
+}
+void suma(int matriz1[F][C],int matriz2[F][C],int n1,int n2,int m1,int m2,int matriz3[F][C])
+{int i,j;
+for(i=0;i<n1;i++)
+ {for(j=0;j<m1;j++)
+   {matriz3[i][j]=matriz1[i][j]+matriz2[i][j];
+ }
+ }
+}
+     
+void producto(int matriz1[F][C],int matriz2[F][C],int n1,int n2,int m1,int m2,int matriz3[F][C])
+{int k,i,j,z;
+for(int i=0; i<n1; ++i)
+       { for(int j=0; j<m2; ++j)
+            {for(int z=0; z<m1; ++z)
+                {matriz3[i][j] += matriz1[i][z] * matriz2[z][j];
+}
+}
+}
+}
+void main()
+{int matriz1[F][C],matriz2[F][C],matriz3[F][C];
+int n1, n2,m1,m2,o,n;
+do
+{cout<<"\tMENU\t\n";
+cout<<"1.MATRIZ TRANSPUESTA\n";
+cout<<"2.SUMA DE DOS MATRICES\n";
+cout<<"3.PRODUCTO DOS DE MATRICES\n";
+cout<<"0.SALIR\n";
+cout<<"ESCOJA UNA OPCION: \n";
+cin>>o;
+switch(o)
+{case 1:cout<<"MATRIZ TRASPUESTA\n";
+        cout<<"Ingrese el numero de filas:\n";
+		cin>>n1;
+		cout<<"Ingrese el numero de columnas:\n";
+		cin>>m1;
+		cargar(matriz1,n1,m1);
+		mostrar(matriz1,n1,m1);
+		if(n1==m1)
+		{transpuesta(matriz1,n1,m1);
+		}
+		else
+		{transpuestanocuadrada(matriz1,n1,m1);
+		}
+		cout<<"LA TRANSPUESTA ES: \n";
+		mostrar(matriz1,n1,m1);
+		getch();
+		break;
+
+case 2:cout<<"SUMA DE DOS MATRICES\n";
+        do{
+        cout<<"PRIMERA MATRIZ\n";
+		cout<<"Numero de filas\n";
+		cin>>n1;
+		cout<<"Numero de columnas\n";
+		cin>>m1;
+		cout<<"SEGUNDA MATRIZ\n";
+		cout<<"Numero de filas\n";
+		cin>>n2;
+		cout<<"Numero de columnas\n";
+		cin>>m2;
+		}
+		while((n1!=n2)||(m1!=m2));
+		cout<<"PRIMERA MATRIZ\n";
+		cargar(matriz1,n1,m1);
+        cout<<"SEGUNDA MATRIZ\n";
+        cargar(matriz2,n2,m2);
+	    cout<<"PRIMERA MATRIZ\n";
+	    mostrar(matriz1,n1,m1);
+	    cout<<"SEGUNDA MATRIZ\n";
+		mostrar(matriz2,n2,m2);
+		suma(matriz1,matriz2,n1,n2,m1,m2,matriz3);
+		cout<<"La suma es:\n ";
+		mostrar(matriz3,n1,m1);
+		getch();
+		break;
+
+case 3:cout<<"PRODUCTO DOS DE MATRICES\n";
+	    do{
+        cout<<"PRIMERA MATRIZ\n";
+		cout<<"Numero de filas\n";
+		cin>>n1;
+		cout<<"Numero de columnas\n";
+		cin>>m1;
+		cout<<"SEGUNDA MATRIZ\n";
+		cout<<"Numero de filas\n";
+		cin>>n2;
+		cout<<"Numero de columnas\n";
+		cin>>m2;
+		}
+		while(n2!=m1);
+		cargar(matriz1,n1,m1);
+		cargar(matriz2,n2,m2);
+		producto(matriz1,matriz2,n1,n2,m1,m2,matriz3);
+		mostrar(matriz3,n1,m2);
+		getch();
+		break;
+case 0: cout<<"SALIR\n";
+	    getch();
+		break;
+default: cout<<"ERROR\n";
+	      getch();
+		  break;
+}
+system("cls");
+}
+while(o!=0);
+getch();
+}
+
+		
