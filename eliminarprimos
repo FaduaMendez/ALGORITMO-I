@@ -1,0 +1,93 @@
+#include <iostream>
+#include <conio.h>
+#define N 10
+using namespace std;
+
+struct elemento{
+	int V[N];
+	int n;
+};
+
+void cargar(elemento M[N][N],int n,int m)
+{int i,j,k;
+for(i=0;i<n;i++){
+	for(j=0;j<m;j++){
+		cout<<"Ingrese el tamaño del vector: ";
+		cin>>M[i][j].n;
+		for(k=0;k<M[i][j].n;k++)
+		{cout<<"valor: ";
+		 cin>>M[i][j].V[k];
+		}
+	}
+}
+}
+bool primo(int x)
+{
+ int i;
+	for(i=2;i<x;i++)
+	  {if(x%i==0)
+		return false;
+	  }
+return true;
+}
+
+int cuantosprimos(int vec[],int n)
+{int i,c=0;
+for(i=0;i<n;i++)
+	{if(primo(vec[i])==true)
+	  c++;
+	}
+return c;
+}
+
+void eliminardigitosprimos(int vec[],int &n)
+{int i,j;
+	for(i=0;i<n;i++)
+		{if(primo(vec[i])==true)
+			{for(j=i;j<n-1;j++)
+			   {vec[j]=vec[j+1];
+	            }
+			    n--;
+				i--;
+			}
+		
+		}
+}
+void eliminarprimos(elemento M[N][N],int n,int m)
+{int i,j,k,l;
+for(i=0;i<n;i++){
+	for(j=0;j<m;j++){
+		{l=cuantosprimos(M[i][j].V,M[i][j].n);
+		if(l>((M[i][j].n)/2))
+			{eliminardigitosprimos(M[i][j].V,M[i][j].n);
+		}
+		}
+	}
+}
+}
+
+
+void mostrar(elemento M[N][N],int n,int m)
+{int i,j,k;
+for(i=0;i<n;i++){
+	for(j=0;j<m;j++){
+		for(k=0;k<M[i][j].n;k++)
+		{cout<<M[i][j].V[k]<<" ";
+		}
+		cout<<endl;
+	}
+}
+}
+
+void main()
+{elemento M[N][N];
+int n,m;
+cout<<"Ingrese las filas: ";
+cin>>n;
+cout<<"Ingrese las columnas: ";
+cin>>m;
+cargar(M,n,m);
+eliminarprimos(M,n,m);
+mostrar(M,n,m);
+getch();
+}
