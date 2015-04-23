@@ -1,0 +1,78 @@
+#include <iostream>
+#include <conio.h>
+#include <string.h>
+#define N 10
+
+using namespace std;
+
+struct palabra {
+char cad[N];
+};
+
+void separarpalabras(char cadena[],palabra vec[],int &n)
+{int i,cont=0,tam,c;
+tam=strlen(cadena);
+i=0;
+while(i<tam)
+{c=0;
+while(cadena[i]!=' ' && cadena[i]!='\0')
+{vec[cont].cad[c]=cadena[i];
+c++;
+i++;
+}
+vec[cont].cad[c]='\0';
+i++;
+cont++;
+}
+n=cont;
+}
+
+
+void llenarmatrizdiagonal(palabra matriz[N][N],palabra vec[N],int m,int n)
+{int i,j,l=0;
+for(i=0;i<m;i++)
+ {strcpy(matriz[i][i].cad,vec[l].cad);
+l++;
+  if(l==n)
+  {l=0;}
+}
+for(i=0;i<m;i++)
+{for(j=0;j<m;j++)
+{if(i!=j)
+  {strcpy(matriz[i][j].cad,vec[l].cad);
+  l++;
+  if(l==n)
+  {l=0;}
+}
+}
+}
+}
+void mostrar(palabra matriz[N][N], int m)
+{int i,j,k,l=0;
+for(i=0;i<m;i++)
+{for(j=0;j<m;j++)
+ {cout<<matriz[i][j].cad<<" ";
+}
+cout<<endl;
+}
+}
+void ejercicio(char cadena[],int m,int &n)
+{palabra vec[N];
+palabra matriz[N][N];
+separarpalabras(cadena,vec,n);
+llenarmatrizdiagonal(matriz,vec,m,n);
+mostrar(matriz,m);
+
+
+}
+void main()
+{ char cadena[N];
+int m,n;
+cout<<"Ingrese una cadena: ";
+gets(cadena);
+cout<<"Ingrese tamaño de matriz: ";
+cin>>m;
+ejercicio(cadena,m,n);
+
+getch();
+}
