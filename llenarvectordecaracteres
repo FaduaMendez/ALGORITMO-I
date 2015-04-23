@@ -10,8 +10,9 @@ struct palabra{
 };
 struct elemento{
 palabra V[N];
-	char M[N][N];
+
 };
+
 
 void cargar(elemento vector[],int n)
 {
@@ -26,23 +27,39 @@ void cargar(elemento vector[],int n)
 	}
 }
 
-void mostrar(elemento vector[],int n)
-{int i,j;
+void cargarlamatriz(elemento vector[],int n,elemento M[N][N])
+{int i,j,k;
 for(i=0;i<n;i++)
 	{for(j=0;j<n;j++)
-	{cout<<(vector[i].V[j].cad)<<" ";
-	}
-cout<<endl;
+        {for(k=0;k<n;k++)
+		{strcpy(M[i][j].V[k].cad,vector[i].V[j].cad);
+        }
+}
 }
 }
 
+void mostrarmatriz(elemento matriz[N][N],int n)
+{int i,j,k;
+for(i=0;i<n;i++)
+	{for(j=0;j<n;j++)
+{for(k=0;k<n;k++)
+	{cout<<matriz[i][j].V[k].cad<<" ";
+	}
+cout<<" ";
+}
+cout<<endl;
+}
+
+}
+
 void main()
-{elemento vector[N];
+{elemento vector[N],matriz[N][N];
 int n;
 cout<<"Ingrese el tamño del vector: ";
 cin>>n;
 fflush(stdin);
 cargar(vector,n);
-mostrar(vector,n);
+cargarlamatriz(vector,n,matriz);
+mostrarmatriz(matriz,n);
 getch();
 }
