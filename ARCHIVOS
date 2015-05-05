@@ -1,0 +1,130 @@
+#include <iostream>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+
+struct regAmigo{
+	char nombre[30];
+	int  edad;
+	char sexo;
+};
+
+
+void crearArchivo(char nomArch[]){
+FILE *ptr;
+ptr=fopen(nomArch,"wb");
+fclose(ptr);
+}
+
+void agregaramigo()
+{regAmigo reg;
+ FILE *ptr;
+
+ do{
+ cout<<"Ingrese el nombre: ";
+ fflush(stdin);
+ gets(reg.nombre);
+ }
+ while(strlen(reg.nombre)==0);
+
+ do{
+ cout<<"Ingrese la edad";
+ cin>>reg.edad;
+ }
+ while(reg.edad<=0||reg.edad>=150);
+
+ do{
+ cout<<"Ingrese el sexo F/M: ";
+ cin>>reg.sexo;
+getch();
+}
+ while((reg.sexo!='F')&&(reg.sexo!='M'));
+ ptr=fopen("amigos.dat","ab"); 
+ fwrite(&reg,sizeof(reg),1,ptr); 
+ fclose(ptr);
+}
+	
+
+void listarArchivo(){
+	FILE *ptr;
+	regAmigo reg;
+	ptr=fopen("amigos.dat","rb");//abre el archivo en modo lectura
+	if(ptr!=NULL){//verifica si el archivo existe
+		cout<<endl<<"Los datos en el archivo son: :\n";
+		fread(&reg,sizeof(reg),1,ptr);//lee un registro desde un archivos
+	while(feof(ptr)==false)//mientras no sea el final del archivo
+		{cout<<"\n"<<reg.nombre<<" "<<reg.edad<<"  "<<reg.sexo;
+		fread(&reg,sizeof(reg),1,ptr);//lee el registro desde el archivo
+		}
+	fclose(ptr);
+	}else{
+		cout<<"Archivo no existe";
+	}
+}
+
+void promedioedad()
+{regAmigo reg;
+ FILE *ptr;
+ int i=0,s=0;
+ ptr=fopen("amigos.dat","rb");//abre el archivo en modo lectura
+	if(ptr!=NULL){//verifica si el archivo existe
+		cout<<endl<<"El promedio de las edades:\n";
+		fread(&reg,sizeof(reg),1,ptr);//lee un registro desde un archivos
+	while(feof(ptr)==false)//mientras no sea el final del archivo
+		{s=s+reg.edad;
+		i++;
+		fread(&reg,sizeof(reg),1,ptr);//lee el registro desde el archivo
+		}
+	cout<<s/i;
+	fclose(ptr);
+	}else{
+		cout<<"Archivo no existe";
+	}
+}
+
+
+
+
+void main()
+{int o;
+do{
+	cout<<"\t*MENU*\t\n";
+	cout<<"1.Crear Archivo\n";
+	cout<<"2.Agregar amigo\n";
+	cout<<"3. Listar amigos\n";
+	cout<<"4. PROMEDIO\n";
+	cout<<"0.Salir\n";
+    cout<<"Elija una opcion: ";
+    cin>>o;
+	switch(o){
+		case 1:cout<<"1.Crear Archivo\n";
+			   crearArchivo("amigos.dat");
+			   getch();
+			   break;
+		case 2:cout<<"2.Agregar amigo\n";
+			   agregaramigo();
+			   getch();
+			   break;
+		case 3:cout<<"3. Listar amigos\n";
+			   listarArchivo();
+			   getch();
+			   break;
+		case 4:cout<<"Promedio de la edad\n";
+			   promedioedad();
+			   getch();
+			   break;
+		case 0:cout<<"0.Salir\n";
+			   getch();
+			   break;
+		default:cout<<"Error";
+			   getch();
+			   break;
+	}
+	system("cls");
+}
+while(o!=0);
+getch();
+}
