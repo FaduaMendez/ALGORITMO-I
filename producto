@@ -1,0 +1,70 @@
+#include <iostream>
+#include <conio.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+
+struct regproducto{
+	int  idproducto;
+	char nombre[40];
+	int  preciounit;
+	char estado;
+};
+
+void crearArchivo(char nomArch[]){
+FILE *ptr;
+ptr=fopen(nomArch,"wb");
+fclose(ptr);
+}
+
+void adicionarproducto()
+{regproducto reg;
+ FILE *ptr;
+ cout<<"Ingrese el id producto";
+ cin>>reg.idproducto;
+ do{
+	cout<<"Ingrese el nombre: ";
+	fflush(stdin);
+	gets(reg.nombre);
+	}
+ while(strlen(reg.nombre)==0);
+cout<<"Ingrese el precio unitario";
+cin>>reg.preciounit;
+ reg.estado='S';
+ ptr=fopen("amigos.dat","ab"); 
+ fwrite(&reg,sizeof(reg),1,ptr); 
+ fclose(ptr);
+}
+
+void listarproductos(){
+	FILE *ptr;
+	regproducto reg;
+	int c=0;
+	ptr=fopen("amigos.dat","rb");
+	if(ptr!=NULL){
+		cout<<endl<<"Los datos en el archivo son: :\n";
+		fread(&reg,sizeof(reg),1,ptr);
+	while(feof(ptr)==false)
+		{
+		 c++;
+		 if(reg.estado=='S')
+		{cout<<"\n"<<c<<".-"<<reg.idproducto<<reg.nombre<<" "<<reg.preciounit<<"  "<<endl;
+	     }fread(&reg,sizeof(reg),1,ptr);
+		}
+	fclose(ptr);
+	}else{
+		cout<<"Archivo no existe";
+	}
+}
+void main()
+{FILE *ptr;
+regproducto reg;
+crearArchivo("producto.dat");
+adicionarproducto();
+listarproductos();
+getch();
+
+}
+
